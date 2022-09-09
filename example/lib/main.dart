@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:flutter/services.dart';
+
 import 'package:auto_start_flutter/auto_start_flutter.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,10 +25,10 @@ class _MyAppState extends State<MyApp> {
   Future<void> initAutoStart() async {
     try {
       //check auto-start availability.
-      var test = await (isAutoStartAvailable as FutureOr<bool>);
+      var test = await isAutoStartAvailable;
       print(test);
       //if available then navigate to auto-start setting page.
-      if (test) await getAutoStartPermission();
+      if (test!) await getAutoStartPermission();
     } on PlatformException catch (e) {
       print(e);
     }
@@ -42,7 +43,7 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Auto Start Flutter Example'),
         ),
         body: Center(
-          child: Text("Auto Start initialize..."),
+          child: GestureDetector(child: Text("Auto Start initialize...")),
         ),
       ),
     );
